@@ -27,10 +27,14 @@ namespace api.Migrations
                         .UseIdentityByDefaultColumn();
 
                     b.Property<string>("Bio")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
@@ -62,15 +66,32 @@ namespace api.Migrations
                     b.ToTable("Image");
                 });
 
-            modelBuilder.Entity("api.Models.User", b =>
+            modelBuilder.Entity("api.Models.Like", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .UseIdentityByDefaultColumn();
 
-                    b.Property<int[]>("Likes")
-                        .HasColumnType("integer[]");
+                    b.Property<int>("LikedUser")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("api.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -96,6 +117,15 @@ namespace api.Migrations
                         .HasForeignKey("HeroId");
                 });
 
+            modelBuilder.Entity("api.Models.Like", b =>
+                {
+                    b.HasOne("api.Models.User", null)
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("api.Models.Hero", b =>
                 {
                     b.Navigation("Images");
@@ -104,6 +134,8 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.User", b =>
                 {
                     b.Navigation("Heroes");
+
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }
