@@ -19,6 +19,7 @@ namespace api.Models
     [MinLength(3, ErrorMessage = "Min length is 3 characters")]
     [MaxLength(2000, ErrorMessage = "Max length is 2000 characters")]
     public string Bio { get; set; }
+    public ICollection<UserHeroes> UserHeroes { get; set; }
     public ICollection<Image> Images { get; set; }
   }
 }

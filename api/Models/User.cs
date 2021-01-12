@@ -15,6 +15,6 @@ namespace api.Models
  
     public ICollection<Like> Likes { get; set; }
     
-    public ICollection<Hero> Heroes { get; set; }
+    public ICollection<UserHeroes> UserHeroes { get; set; }
   }
 }
