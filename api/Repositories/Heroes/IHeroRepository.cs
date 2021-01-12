@@ -7,7 +7,7 @@ namespace api.Repositories.Heroes
 {
   public interface IHeroRepository
   {
-    Task Save(Hero hero);
+    Task<ActionResult<Hero>> Save(Hero hero);
     Task<ActionResult<List<Hero>>> List();
     Task<ActionResult<Hero>> Read(int id);
   }

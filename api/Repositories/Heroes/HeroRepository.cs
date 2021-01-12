@@ -28,10 +28,12 @@ namespace api.Repositories.Heroes
       return hero;
     }
 
-    public async Task Save(Hero hero)
+    public async Task<ActionResult<Hero>> Save(Hero hero)
     {
       _context.Heroes.Add(hero);
       await _context.SaveChangesAsync();
+
+      return await _context.Heroes.AsNoTracking().FirstOrDefaultAsync(x => x.Name == hero.Name);
     }
   }
 }
