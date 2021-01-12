@@ -28,13 +28,16 @@ namespace api.Migrations
 
                     b.Property<string>("Bio")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("character varying(60)");
+
+                    b.Property<string>("OriginalName")
+                        .HasColumnType("text");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
@@ -53,7 +56,7 @@ namespace api.Migrations
                         .HasColumnType("integer")
                         .UseIdentityByDefaultColumn();
 
-                    b.Property<int?>("HeroId")
+                    b.Property<int>("HeroId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Url")
@@ -63,7 +66,7 @@ namespace api.Migrations
 
                     b.HasIndex("HeroId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("api.Models.Like", b =>
@@ -114,7 +117,9 @@ namespace api.Migrations
                 {
                     b.HasOne("api.Models.Hero", null)
                         .WithMany("Images")
-                        .HasForeignKey("HeroId");
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("api.Models.Like", b =>
