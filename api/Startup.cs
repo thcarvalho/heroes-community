@@ -17,6 +17,9 @@ using Microsoft.OpenApi.Models;
 using api.Repositories.Users;
 using api.Repositories.Heroes;
 using api.Repositories.Likes;
+using api.Services.MarvelAPI;
+using api.Repositories.Images;
+using api.Services.TranslationAPI;
 
 namespace api
 {
@@ -38,6 +41,9 @@ namespace api
       services.AddTransient<IUserRepository, UserRepository>();
       services.AddTransient<IHeroRepository, HeroRepository>();
       services.AddTransient<ILikeRepository, LikeRepository>();
+      services.AddTransient<IImageRepository, ImageRepository>();
+      services.AddTransient<IMarvelAPIService, MarvelAPIService>();
+      services.AddTransient<ITranslationService, TranslationService>();
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
