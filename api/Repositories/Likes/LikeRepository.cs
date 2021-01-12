@@ -25,6 +25,11 @@ namespace api.Repositories.Likes
 
     public async Task Save(Like like)
     {
+      var verify = await _context.Likes.Where(x => x.UserId == like.UserId && x.LikedUser == like.LikedUser).FirstOrDefaultAsync();
+      if (verify != null)
+      {
+        return;
+      }
       _context.Likes.Add(like);
       await _context.SaveChangesAsync();
     }

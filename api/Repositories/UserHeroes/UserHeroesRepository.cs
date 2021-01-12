@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Repositories.UserHeroes
 {
@@ -14,6 +16,11 @@ namespace api.Repositories.UserHeroes
 
     public async Task Save(Models.UserHeroes userHeroes)
     {
+      var verify = await _context.UserHeroes.Where(x => x.UserId == userHeroes.UserId && x.HeroId == userHeroes.HeroId).FirstOrDefaultAsync();
+      if (verify != null)
+      {
+        return;
+      }
       _context.UserHeroes.Add(userHeroes);
       await _context.SaveChangesAsync();
     }
