@@ -20,6 +20,7 @@ using api.Repositories.Likes;
 using api.Services.MarvelAPI;
 using api.Repositories.Images;
 using api.Services.TranslationAPI;
+using api.Repositories.UserHeroes;
 
 namespace api
 {
@@ -42,6 +43,7 @@ namespace api
       services.AddTransient<IHeroRepository, HeroRepository>();
       services.AddTransient<ILikeRepository, LikeRepository>();
       services.AddTransient<IImageRepository, ImageRepository>();
+      services.AddTransient<IUserHeroesRepository, UserHeroesRepository>();
       services.AddTransient<IMarvelAPIService, MarvelAPIService>();
       services.AddTransient<ITranslationService, TranslationService>();
       services.AddSwaggerGen(c =>
