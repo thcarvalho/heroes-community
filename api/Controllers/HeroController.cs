@@ -52,7 +52,7 @@ namespace api.Controllers
         {
           var response = await marvelAPI.GetData(hero.OriginalName);
 
-          hero.Bio = translationService.TranslateText(response.data.results[0].description).ToString();
+          hero.Bio = translationService.TranslateText(response.data.results[0].description).TranslatedText;
 
           var heroImg = response.data.results[0].thumbnail;
           Image img = new Image();
