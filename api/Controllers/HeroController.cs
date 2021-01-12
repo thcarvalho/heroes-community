@@ -66,9 +66,9 @@ namespace api.Controllers
 
           return hero;
         }
-        catch (ArgumentOutOfRangeException exception)
+        catch (ArgumentOutOfRangeException)
         {
-          throw exception;
+          throw new ArgumentOutOfRangeException();
         }
 
       }
