@@ -20,13 +20,13 @@ namespace api.Repositories.Users
 
     public async Task<ActionResult<List<User>>> List()
     {
-      var users = await _context.Users.Include(x => x.Likes).Include(x => x.UserHeroes).ToListAsync();
+      var users = await _context.Users.Include(x => x.Likes).Include(x => x.UserHeroes).Include(x => x.Avatar).ToListAsync();
       return users;
     }
 
     public async Task<ActionResult<User>> Read(int id)
     {
-      var user = await _context.Users.Include(x => x.Likes).Include(x => x.UserHeroes).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+      var user = await _context.Users.Include(x => x.Likes).Include(x => x.UserHeroes).Include(x => x.Avatar).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
       return user;
     }
 
