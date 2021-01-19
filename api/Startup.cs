@@ -21,6 +21,11 @@ using api.Services.MarvelAPI;
 using api.Repositories.Images;
 using api.Services.TranslationAPI;
 using api.Repositories.UserHeroes;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using api.Repositories.Avatars;
+using api.Config.UploadImage;
 
 namespace api
 {
@@ -44,8 +49,10 @@ namespace api
       services.AddTransient<ILikeRepository, LikeRepository>();
       services.AddTransient<IImageRepository, ImageRepository>();
       services.AddTransient<IUserHeroesRepository, UserHeroesRepository>();
+      services.AddTransient<IAvatarRepository, AvatarRepository>();
       services.AddTransient<IMarvelAPIService, MarvelAPIService>();
       services.AddTransient<ITranslationService, TranslationService>();
+      services.AddTransient<IUploadImage, UploadImage>();
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
@@ -65,6 +72,13 @@ namespace api
       app.UseHttpsRedirection();
 
       app.UseRouting();
+
+      app.UseStaticFiles();
+      app.UseStaticFiles(new StaticFileOptions()
+      {
+        FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Uploads")),
+        RequestPath = new PathString("/Uploads")
+      });
 
       app.UseAuthorization();
 
