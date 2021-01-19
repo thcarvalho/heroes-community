@@ -13,5 +13,6 @@ namespace api.Data
     public DbSet<Like> Likes { get; set; }
     public DbSet<Image> Images { get; set; }
     public DbSet<UserHeroes> UserHeroes { get; set; }
+    public DbSet<Avatar> Avatars { get; set; }
   }
 }
