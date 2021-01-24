@@ -14,4 +14,11 @@ export const DefaultButton = styled.button`
   color: #fff;
   font-weight: 700;
   font-family: 18px;
+
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: ${colors.hover_red};
+  }
 `
