@@ -1,21 +1,6 @@
 import styled from 'styled-components'
 import colors from '../colors'
 
-export const LoginPage = styled.div`
-  width: 100vw;
-  height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  h1 {
-    margin-bottom: 80px;
-    color: ${colors.main_red};
-    text-align: center;
-  }
-`
-
 export const LoginForm = styled.form`
   width: 420px;
   height: 380px;

@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
+import colors from './colors'
 
 export default createGlobalStyle`
   * {
@@ -12,4 +13,18 @@ export default createGlobalStyle`
     color: #2c2c2c;
     font: 400 16px Roboto, sans-serif
   }
+`
+
+export const LogoTitle = styled.h1`
+  margin-bottom: 80px;
+  color: ${colors.main_red};
+  text-align: center;
+`
+export const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
